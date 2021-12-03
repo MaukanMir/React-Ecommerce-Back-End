@@ -9,7 +9,7 @@ const cartRoute = require("./routes/cart")
 const orderRoute = require("./routes/order");
 const stripeRoute = require("./routes/stripe");
 const cors = require("cors");
-
+const port = process.env.PORT || 5000
 dotenv.config();
 
 mongoose
@@ -27,13 +27,9 @@ app.use("/api/carts",cartRoute)
 app.use("/api/orders",orderRoute)
 app.use("/api/checkout", stripeRoute);
 
-app.use(express.static(path.join(__dirname, "/store-project/build")));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/store-project/build', 'index.html'));
-});
 
-app.listen(process.env.PORT || 5000, () =>{
-  console.log("Backend server is running")
+app.listen(port, () =>{
+  console.log("Backend server is running: ",port)
 });
 
